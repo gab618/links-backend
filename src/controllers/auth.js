@@ -13,7 +13,7 @@ router.post('/sign-in', accountSignIn,  async (req, res) => {
 
   const account = await Account.findOne({ where: { email }});
 
-  const match = account ? bcrypt.compareSync(password, account.password) : nulll;
+  const match = account ? bcrypt.compareSync(password, account.password) : null;
   if(!match) return res.jsonBadRequest(null, getMessage('account.signin.invalid'));
 
   const token = generateJwt({id: account.id});
