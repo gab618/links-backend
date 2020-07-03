@@ -16,12 +16,15 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.use('/auth', authController);
-app.use(checkJwt);
-app.use('/link', linkController);
 
 app.get('/',(req, res) => {
   return res.json('Api running...');
 });
+
+app.use(checkJwt);
+app.use('/link', linkController);
+
+
 
 db.sequelize.sync().then(() => {
   app.listen(3001, () => {
